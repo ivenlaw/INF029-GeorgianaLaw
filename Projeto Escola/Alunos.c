@@ -1,6 +1,7 @@
 /* Cadastro de Alunos */
 
 #include <stdio.h>
+#define tamAluno 3
 
 typedef struct {
 
@@ -9,7 +10,11 @@ typedef struct {
   char sexoAluno;
   int nascimentoAluno;
   int cpfAluno;
-} aluno;
+} Aluno;
+
+int main {
+
+  
 
 }
 
