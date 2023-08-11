@@ -1,0 +1,16 @@
+/* Cadastro de Alunos */
+
+main {
+
+typedef struct {
+
+  int matriculaAluno;
+  char nomeAluno;
+  char sexoAluno;
+  int nascimentoAluno;
+  int cpfAluno;
+} aluno;
+
+}
+
+
