@@ -124,6 +124,7 @@ int main() {
                    aluno[i].nascimentoAluno.ano);
             printf("CPF.: %s\n", aluno[i].cpfAluno);
             break;
+            
           }
           else
             printf("\nMatrícula não localizada.\n");
