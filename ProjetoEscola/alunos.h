@@ -23,7 +23,7 @@ void cadastarAluno() {
   
   printf("\nDigite a matrícula: ");
   scanf("%d", &aluno[nr_aluno].matricula);
-  getchar();
+  getchar(); 
 
 // Cadastrar o nome do aluno
   
