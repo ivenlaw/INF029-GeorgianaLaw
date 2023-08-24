@@ -1,65 +1,107 @@
 /* Projeto Escola */
 
 #include <stdio.h>
-#include <string.h>
+#include "cadastros.h"
 #include <stdlib.h>
+#include <string.h>
 #ifndef alunos_h
 #define alunos_h
 
-int validadorCPF ();
+#define tamAluno 3
 
-typedef struct {
-  int dia;
-  int mes;
-  int ano;
-} Data;
+int validadorCPF();
 
-typedef struct {
+// Opcao de castramento de aluno
 
-  int matriculaAluno;
-  char nomeAluno[51];
-  char sexoAluno;
-  Data nascimentoAluno;
-  char cpfAluno[12];
-} Aluno;
+void cadastarAluno() {
 
+  Ficha aluno[tamAluno];
+  int i, j, opcao, v, sexo;
+  int nr_aluno = 0;
 
-// Validador de CPF
-  int validadorCPF (int v[12]) {
-    int num1, num2, num3, num4, num5, num6, num7, num8, num9, num10, num11, soma1, soma2, resto1, resto2;
-    
-    num1 = atoi(v[1]);
-    num2 = atoi(v[2]);
-    num3 = atoi(v[3]);
-    num4 = atoi(v[4]);
-    num5 = atoi(v[5]);
-    num6 = atoi(v[6]);
-    num7 = atoi(v[7]);
-    num8 = atoi(v[8]);
-    num9 = atoi(v[9]);
-    num10 = atoi(v[10]);
-    num11 = atoi(v[11]);
+// Cadastrar matrícula do aluno
+  
+  printf("\nDigite a matrícula: ");
+  scanf("%d", &aluno[nr_aluno].matricula);
+  getchar();
+
+// Cadastrar o nome do aluno
+  
+  printf("\nDigite o nome: ");
+  fflush(stdin);
+  fgets(aluno[nr_aluno].nome, 51, stdin);
+  size_t x = strlen(aluno[nr_aluno].nome) - 1;
+  if (aluno[nr_aluno].nome[x] == '\n')
+    aluno[nr_aluno].nome[x] = '\0';
+
+// Cadastrar o sexo do aluno
+  
+  do {
+    printf("\nDigite o sexo (F/M): ");
+    aluno[nr_aluno].sexo = getchar();
+    if (aluno[nr_aluno].sexo == 'F' || aluno[nr_aluno].sexo == 'M') {
+      v = 1;
+    } else {
+      printf("\nSexo inválido. Digite 'M' ou 'F' maiúsculos.\n");
+      v = 0;
+      getchar();
     }
-    soma1=((num1*10)+(num2*9)+(num3*8)+(num4*7)+(num5*6)+(num6*5)+(num7*4)+(num8*3)+(num9*2));
-    resto1%=((soma1*10)/11);
-    if (resto1==v[10]) {
-      soma2=((num1*11)+(num2*10)+(num3*9)+(num4*8)+(num5*7)+(num6*6)+(num7*5)+(num8*4)+(num9*3)+(num10*2));
-      resto2%=((soma2*10)/11);
-      if(resto2==v[11])
-        return 1;
-      else
-        return 0;
-    }
-    else
-      return 0;
-  }
+  } while (v == 0);
 
-/* usa um for para ler cada caracter do cpf
-          //Percorrendo o vetor de char e mostrando
-         //cada elemento individualmente
-          for (i=0; i<6; i++)
-{
-  printf("Valor do elemento %d da string = %c\n",i, texto[i]);
-}  */
+// Cadastrar o dia de nascimento do aluno
+  
+  do {
+    v = 0;
+    printf("\nDigite o dia do nascimento(dd): ");
+    scanf("%d", &aluno[nr_aluno].nascimento.dia);
+    if (aluno[nr_aluno].nascimento.dia > 31 ||
+        aluno[nr_aluno].nascimento.dia <= 0) {
+      printf("\nDia inválido.\n");
+    } else
+      v = 1;
+  } while (!v);
+
+// Cadastrar o mês de nascimento do aluno
+  
+  do {
+    v = 0;
+    printf("\nDigite o mês do nascimento (mm): ");
+    scanf("%d", &aluno[nr_aluno].nascimento.mes);
+    if (aluno[nr_aluno].nascimento.mes > 12 ||
+        aluno[nr_aluno].nascimento.mes <= 0) {
+      printf("\nMês inválido.\n");
+    } else
+      v = 1;
+  } while (!v);
+
+// Cadastrar o ano de nascimento do aluno
+  
+  do {
+    v = 0;
+    printf("\nDigite o ano do nascimento (aaaa): ");
+    scanf("%d", &aluno[nr_aluno].nascimento.ano);
+    getchar();
+    if (aluno[nr_aluno].nascimento.ano > 2023 ||
+        aluno[nr_aluno].nascimento.ano <= 1903) {
+      printf("\nAno inválido.\n");
+    } else
+      v = 1;
+  } while (!v);
+
+// Cadastrar o CPF do aluno
+  
+  do {
+    printf("\nDigite o CPF: ");
+    fflush(stdin);
+    fgets(aluno[nr_aluno].cpf, 12, stdin);
+    x = strlen(aluno[nr_aluno].cpf) - 1;
+    if (aluno[nr_aluno].cpf[x] == '\n')
+      aluno[nr_aluno].cpf[x] = '\0';
+  } while (!v);
+
+  printf("\nCadastro finalizado.\n");
+}
+
+
 
 #endif
