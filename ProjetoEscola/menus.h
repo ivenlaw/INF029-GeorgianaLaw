@@ -1,47 +1,20 @@
 // Modularização referente aos cadastros no Projeto Escola
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include "cadastros.h"
-#include "alunos.h"
+//#include <stdio.h>
+//#include <string.h>
+//#include <stdlib.h>
+//#include "alunos.h"
+#ifndef menus_h
+#define menus_h
 
 
-// Menu geral da escola
+// Prototipos
 
-int menuGeral(){  
+int menuGeral();
+int menuCadastro();
 
-  int opcao;
-  
-  printf("Escolha sua opção: \n");
-  printf("0 - Sair \n");
-  printf("1 - Cadastro dos alunos \n");
-  printf("2 - Cadastro dos professores \n");
-  printf("3 - Cadastro das disciplinas \n");
-  printf("4 - Relatórios \n\n");
-  scanf("%d", &opcao);
-  
-  return opcao;
-}
 
-// Menu geral de cadastro de pessoas
 
-int menuCadastro(){  
-
-  int opcao;
-  
-  printf("Escolha sua opção: \n");
-  printf("0 - Sair \n");
-  printf("1 - Cadastrar \n");
-  printf("2 - Excluir \n");
-  printf("3 - Atualizar \n");
-  printf("4 - Consulta \n\n");
-  scanf("%d", &opcao);
-  
-  return opcao;
-}
-
-// struct para datas
 
 
 
@@ -84,3 +57,5 @@ soma1, soma2, resto1, resto2;
 {
   printf("Valor do elemento %d da string = %c\n",i, texto[i]);
 }  */
+
+#endif

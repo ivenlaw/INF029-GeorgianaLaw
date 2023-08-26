@@ -1,32 +1,18 @@
 // Modularização referente aos cadastros no Projeto Escola
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <string.h>
+//#include <stdlib.h>
+//#include "alunos.h"
 #ifndef cadastros_h
 #define cadastros_h
 
 
 // Prototipos
 
-  int menuCadastro();
+int menuCadastro();
 
-// Menu geral de cadastro de pessoas
 
-int menuCadastro(){  
-
-  int opcao;
-  
-  printf("Escolha sua opção: \n");
-  printf("0 - Sair \n");
-  printf("1 - Cadastrar \n");
-  printf("2 - Excluir \n");
-  printf("3 - Atualizar \n");
-  printf("4 - Consulta \n\n");
-  scanf("%d", &opcao);
-  
-  return opcao;
-}
 
 // struct para datas
 

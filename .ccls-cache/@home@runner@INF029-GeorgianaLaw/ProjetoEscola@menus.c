@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "cadastros.h"
+#include "menus.h"
 #include "alunos.h"
 
 
@@ -11,17 +11,18 @@
 
 int menuGeral(){  
 
-  int opcao;
+  int opcaoGeral;
   
+  printf("\n\n*** Menu escola ***\n\n");
   printf("Escolha sua opção: \n");
   printf("0 - Sair \n");
   printf("1 - Cadastro dos alunos \n");
   printf("2 - Cadastro dos professores \n");
   printf("3 - Cadastro das disciplinas \n");
   printf("4 - Relatórios \n\n");
-  scanf("%d", &opcao);
+  scanf("%d", &opcaoGeral);
   
-  return opcao;
+  return opcaoGeral;
 }
 
 // Menu geral de cadastro de pessoas

@@ -3,13 +3,27 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#ifndef cadastros_h
-#define cadastros_h
+#include "menus.h"
+#include "alunos.h"
 
 
-// Prototipos
+// Menu geral da escola
 
-  int menuCadastro();
+int menuGeral(){  
+
+  int opcaoGeral;
+  
+  printf("\n\n*** Menu escola ***\n\n");
+  printf("Escolha sua opção: \n");
+  printf("0 - Sair \n");
+  printf("1 - Cadastro dos alunos \n");
+  printf("2 - Cadastro dos professores \n");
+  printf("3 - Cadastro das disciplinas \n");
+  printf("4 - Relatórios \n\n");
+  scanf("%d", &opcaoGeral);
+  
+  return opcaoGeral;
+}
 
 // Menu geral de cadastro de pessoas
 
@@ -30,22 +44,7 @@ int menuCadastro(){
 
 // struct para datas
 
-typedef struct {
-  int dia;
-  int mes;
-  int ano;
-} Data;
 
-// struct para ficha de cadastro
-
-typedef struct {
-
-  int matricula;
-  char nome[51];
-  char sexo;
-  Data nascimento;
-  char cpf[12];
-} Ficha;
 
 /*
 // Validador de CPF
@@ -86,5 +85,3 @@ soma1, soma2, resto1, resto2;
 {
   printf("Valor do elemento %d da string = %c\n",i, texto[i]);
 }  */
-
-#endif
