@@ -12,7 +12,7 @@
 #define CADASTRO_FINALIZADO -2
 #define LISTA_VAZIA -3
 #define CADASTRO_EXCLUIDO -4
-
+#define CADASTRO_ATUALIZADO -5
 
 // struct para datas
 
@@ -41,7 +41,7 @@ int validadorCPF();
 int cadastarAluno(Ficha aluno[], int nr_aluno);
 int listarAluno (Ficha aluno[], int nr_aluno);
 int excluirAluno (Ficha aluno[], int nr_aluno);
-
+int atualizarAluno (Ficha aluno[], int nr_aluno);
 
 
 #endif

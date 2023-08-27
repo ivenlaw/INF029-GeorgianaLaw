@@ -12,10 +12,9 @@
 
 int listarAlunos (Ficha aluno[], int nr_aluno){
   int consulta, j;
-  int i=0;
   printf("\n\nLista dos alunos cadastrados \n\n");  
-  while (i<nr_aluno) {
-    printf("\n\n Matrícula %d **\n",
+  for (int i=0; i < nr_aluno; i++) {
+    printf("\n\nMatrícula: %d \n",
            aluno[i].matricula);
     printf("Nome: %s\n", aluno[i].nome);
     printf("Sexo: %c\n", aluno[i].sexo);
@@ -34,7 +33,6 @@ int listarAlunos (Ficha aluno[], int nr_aluno){
     printf("-");
     for(j=9;j<11;j++)   
         printf("%c", aluno[i].cpf[j]);
-//    break;
   }
   return 0;
 }

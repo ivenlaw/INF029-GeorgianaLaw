@@ -80,7 +80,17 @@ int main () {
               // atualizar o cadastro do aluno
               case 3:{
                 if (opcao == 3) {
-                  printf("menu 3.\n");
+                  int retorno = atualizarAluno (aluno, nr_aluno);
+                  if(retorno==CADASTRO_ATUALIZADO) {
+                    printf("\nCadastro atualizado\n");
+                    sairAluno = 1;
+                  }
+                  else{
+                    if (retorno==MATRICULA_INVALIDA){
+                      printf("Matrícula não localizada");
+                      sairAluno = 1;
+                    }
+                  }
                 }
               break;
               }
@@ -100,18 +110,15 @@ int main () {
                 }
               break;
               }
-          
               default: {
                 printf("Opção inválida.\n");
                 break;
-              }
-            
+              } 
             }
           }
         }
-//        menuCadastro();
-        break;
-        }
+      break;
+      }
 
 // opção CADASTRO DE PROFESSORES
       case 2:
@@ -186,12 +193,13 @@ int main () {
                 printf("Opção inválida.\n");
                 break;
               }
-                
-            break;
             }
           }
         }   
-                
+      default: {
+        printf("\nOpção inválida.\n");
+        break;
+      }          
     }
   }
   return 0;
