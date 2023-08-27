@@ -33,12 +33,12 @@ int main () {
           break;
         }
 
-// opção CADASTRO DE ALUNOS
+// opção CADASTRO DE ALUNOS 
       case 1:{
         if (opcaoGeral == 1) {
           int sairAluno = 0;
           printf("\n\n*** Menu Cadastro de Aluno ***\n\n");
-          int opcao = menuCadastro();
+          int opcao = menuCadastro(aluno, nr_aluno);
           // Menu inicial para Aluno
           while (!sairAluno) {
           // Direcionamento das opções
@@ -51,10 +51,10 @@ int main () {
                 }
               break;
               }
-              // Inclur um aluno no cadastro
+              // Incluir um aluno no cadastro
               case 1:{
                 if (opcao == 1) {
-                  int retorno=cadastarAluno();
+                  int retorno=cadastarAluno(aluno, nr_aluno);
                   if (retorno == CADASTRO_FINALIZADO){
                     printf("\nCadastro finalizado.\n\n");
                     nr_aluno++;
@@ -66,7 +66,11 @@ int main () {
               // excluir um aluno do cadastro
               case 2:{
                 if (opcao == 2) {
-                  printf("\nDigite a matrícula do aluno que deseja excluir: ");
+                  int retorno = excluirAluno(aluno, nr_aluno);
+                  if(retorno == CADASTRO_EXCLUIDO){
+                    printf("Cadastro excluído");
+                    nr_aluno--;
+                  }
                 }
               break;
               }
@@ -77,13 +81,19 @@ int main () {
                 }
               break;
               }
-              // Fazer a consulta do cadastro de um aluno
+              // Fazer a consulta do cadastro dos alunos
               case 4:{
                 if (opcao == 4) {
-                listarAluno (aluno, nr_aluno);
-                int retorno = listarAluno (aluno, nr_aluno);
-                if (retorno == MATRICULA_INVALIDA)
-                   printf("\nMatrícula não localizada.\n");
+                  if (nr_aluno==0){
+                    printf("\nNão há alunos cadastrados.\n");
+                    sairAluno = 1;
+                    break;
+                  }
+                  else {
+                    int retorno = listarAluno (aluno, nr_aluno);
+                    sairAluno = 1;
+                    break; 
+                  } 
                 }
               break;
               }

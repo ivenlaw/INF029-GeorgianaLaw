@@ -10,6 +10,9 @@
 #define TAM_ALUNO 3
 #define MATRICULA_INVALIDA -1
 #define CADASTRO_FINALIZADO -2
+#define LISTA_VAZIA -3
+#define CADASTRO_EXCLUIDO -4
+
 
 // struct para datas
 
@@ -35,9 +38,9 @@ typedef struct {
 // Prototipos
 
 int validadorCPF();
-int cadastarAluno();
+int cadastarAluno(Ficha aluno[], int nr_aluno);
 int listarAluno (Ficha aluno[], int nr_aluno);
-
+int excluirAluno (Ficha aluno[], int nr_aluno);
 
 
 

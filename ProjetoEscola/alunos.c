@@ -9,11 +9,12 @@
 
 // FUNÇÃO com Opcao de cadastramento de aluno
 
-int cadastarAluno() {
+int cadastarAluno(Ficha aluno[], int nr_aluno) {
 
-  Ficha aluno[TAM_ALUNO];
-  int i, j, opcao, v, sexo;
-  int nr_aluno = 0;
+  int v;
+//  Ficha aluno[TAM_ALUNO];
+//  int i, j, opcao, v, sexo;
+//  int nr_aluno = 0;
 
 // Cadastrar matrícula do aluno
   
@@ -21,6 +22,10 @@ int cadastarAluno() {
   scanf("%d", &aluno[nr_aluno].matricula);
   getchar(); 
 
+// Ativando cadastro 
+
+  aluno[nr_aluno].ativo=0;
+  
 // Cadastrar o nome do aluno
   
   printf("\nDigite o nome: ");
@@ -94,15 +99,37 @@ int cadastarAluno() {
     if (aluno[nr_aluno].cpf[x] == '\n')
       aluno[nr_aluno].cpf[x] = '\0';
   } while (!v);
-
-  
   return CADASTRO_FINALIZADO;
 }
+
+// FUNÇÃO para excluir aluno
+
+int excluirAluno (Ficha aluno[], int nr_aluno) {
+
+  int consulta, i;
+  printf("Digite a matrícula a ser excluida: n");
+  scanf("%d", &consulta);
+
+  for (i=0; i<nr_aluno; i++) {
+    if (aluno[i].ativo == -1) {
+      printf("Cadastro já inativo");
+    }
+    else if (aluno[i].matricula == consulta) {
+      aluno[i].ativo=-1;
+      for(int j=i+1; j<nr_aluno; j++) {
+        aluno[i]=aluno[j];
+        return CADASTRO_EXCLUIDO;
+        break;
+      }
+    }
+  }
+  return 0;
+}
+
 
 // FUNÇÃO para listar um Aluno
 
 int listarAluno (Ficha aluno[], int nr_aluno){
-  
   int consulta, j;
   printf("\nDigite a matrícula a ser consultada\n");
   scanf("%d", &consulta);
@@ -128,11 +155,34 @@ int listarAluno (Ficha aluno[], int nr_aluno){
       for(j=9;j<11;j++)   
           printf("%c", aluno[i].cpf[j]);
       break;
-    }
-    else{
-      return MATRICULA_INVALIDA;
-      break;
-    }  
+  /*
+  // FUNÇÃO para listar os Alunos *** fazer com for
+  int j;
+  int i = 0;
+  printf("\n\nLista dos alunos cadastrados \n\n");  
+  while (i<nr_aluno) {
+    printf("\n\n Matrícula %d **\n",
+           aluno[i].matricula);
+    printf("Nome: %s\n", aluno[i].nome);
+    printf("Sexo: %c\n", aluno[i].sexo);
+    printf("Data de Nascimento: %d/%d/%d\n",
+           aluno[i].nascimento.dia, aluno[i].nascimento.mes,
+           aluno[i].nascimento.ano);
+    printf("CPF.: ");
+    for (j=0;j<3;j++)    
+        printf("%c", aluno[i].cpf[j]);
+    printf(".");
+    for(j=3;j<6;j++)     
+        printf("%c", aluno[i].cpf[j]);
+    printf(".");
+    for(j=6;j<9;j++)   
+        printf("%c", aluno[i].cpf[j]);
+    printf("-");
+    for(j=9;j<11;j++)   
+        printf("%c\n\n", aluno[i].cpf[j]);
+    i++;*/
   }
+  
+}
   return 0;
 }
