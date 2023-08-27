@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "menus.h"
 #include "alunos.h"
+#include "relatorios.h"
 
 
 // Menu geral da escola
@@ -40,6 +41,24 @@ int menuCadastro(){
   scanf("%d", &opcao);
   
   return opcao;
+}
+
+// Menu geral da escola
+
+int menuRelatorios(){  
+
+  int opcaoRelatorios;
+  
+  printf("\n\n*** Menu relatórios ***\n\n");
+  printf("Escolha sua opção: \n");
+  printf("0 - Sair \n");
+  printf("1 - Listar alunos \n");
+  printf("2 - Listar professores \n");
+  printf("3 - Listar disciplinas \n");
+  printf("4 - Administrativo \n\n");
+  scanf("%d", &opcaoRelatorios);
+  
+  return opcaoRelatorios;
 }
 
 // struct para datas

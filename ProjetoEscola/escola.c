@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include "menus.h"
 #include "alunos.h"
+//#include "professores.h"
+#include "relatorios.h"
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
@@ -68,8 +70,9 @@ int main () {
                 if (opcao == 2) {
                   int retorno = excluirAluno(aluno, nr_aluno);
                   if(retorno == CADASTRO_EXCLUIDO){
-                    printf("Cadastro excluído");
+                    printf("\nCadastro excluído\n");
                     nr_aluno--;
+                    sairAluno = 1;
                   }
                 }
               break;
@@ -123,26 +126,144 @@ int main () {
 //          cadastarDisciplina();
          break;
         }
-  
+// opção RELATÓRIOS
+
       case 4:
         if (opcaoGeral == 4) {
-//         relatorios ();
+          int sairRelatorio = 0;
+          int opcaoRelatorios = menuRelatorios();
+          // Menu inicial de Relatórios
+          while (!sairRelatorio) {
+          // Direcionamento das opções
+            switch (opcaoRelatorios) {
+              // Sair do menu Relatórios
+              case 0:{
+                if (opcaoRelatorios == 0) {
+                  printf("\nSaindo do menu Relatórios.\n\n");
+                  sairRelatorio = 1;
+                  break;
+                }
+              
+              }
 
-        break;
-        }
-  
-      default: {
-        printf("Opção inválida.\n");
-        break;
-      }
+              // Listagem de alunos
+              case 1:{
+                if (opcaoRelatorios == 1) {
+                  listarAlunos (aluno, nr_aluno);
+                  sairRelatorio = 1;
+                  break;
+                 }
+              }
+
+              // Listar professores
+              case 2:{
+                if (opcaoRelatorios == 2) {
+                  printf("\nListar professores.\n\n");
+                  sairRelatorio = 1;
+                }
+              break;
+              }
+
+              // Listar disciplinas
+              case 3:{
+                if (opcaoRelatorios == 3) {
+                  printf("\nListar disciplinas.\n\n");
+                  sairRelatorio = 1;
+                }
+              break;
+              }
+
+              // Administrativo
+              case 4:{
+                if (opcaoRelatorios == 4) {
+                  printf("\nAdministrativo.\n\n");
+                  sairRelatorio = 1;
+                }
+              break;
+              }
+
+              default: {
+                printf("Opção inválida.\n");
+                break;
+              }
+                
+            break;
+            }
+          }
+        }   
+                
     }
   }
-
-
-
-  
-  return 0;
-
-  
   return 0;
 }
+
+
+
+
+/* 
+// opção RELATÓRIOS
+
+      case 4:
+        if (opcaoGeral == 4) {
+          int sairRelatorio = 0;
+          int opcaoRelatorios = menuRelatorios();
+          // Menu inicial de Relatórios
+          while (!sairRelatorio) {
+          // Direcionamento das opções
+            switch (opcaoRelatorios) {
+              // Sair do menu Relatórios
+              case 0:{
+                if (opcaoRelatorios == 0) {
+                  printf("\nSaindo do menu Relatórios.\n\n");
+                  sairRelatorio = 1;
+                  break;
+                }
+
+              }
+
+              // Listagem de alunos
+              case 1:{
+                if (opcaoRelatorios == 1) {
+                  printf("\nListar alunos.\n\n");
+                  sairRelatorio = 1;
+                }
+              break;
+              }
+
+              // Listar professores
+              case 2:{
+                if (opcaoRelatorios == 2) {
+                  printf("\nListar professores.\n\n");
+                  sairRelatorio = 1;
+                }
+              break;
+              }
+
+              // Listar disciplinas
+              case 3:{
+                if (opcaoRelatorios == 3) {
+                  printf("\nListar disciplinas.\n\n");
+                  sairRelatorio = 1;
+                }
+              break;
+              }
+
+              // Administrativo
+              case 4:{
+                if (opcaoRelatorios == 4) {
+                  printf("\nAdministrativo.\n\n");
+                  sairRelatorio = 1;
+                }
+              break;
+              }
+
+              default: {
+                printf("Opção inválida.\n");
+                break;
+              }
+              
+            break;
+            }
+          }
+        }  
+            */

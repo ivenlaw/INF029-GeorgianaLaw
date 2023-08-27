@@ -12,6 +12,7 @@
 
 int menuGeral();
 int menuCadastro();
+int menuRelatorios();
 
 
 
