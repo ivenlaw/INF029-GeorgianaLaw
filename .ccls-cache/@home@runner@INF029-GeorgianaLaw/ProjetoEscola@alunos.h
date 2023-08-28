@@ -13,6 +13,9 @@
 #define LISTA_VAZIA -3
 #define CADASTRO_EXCLUIDO -4
 #define CADASTRO_ATUALIZADO -5
+#define CPF_VALIDADO -6
+#define CPF_INCORRETO -7
+
 
 // struct para datas
 
@@ -37,7 +40,7 @@ typedef struct {
 
 // Prototipos
 
-int validadorCPF();
+int validadorCPF (Ficha aluno[], int nr_aluno);
 int cadastarAluno(Ficha aluno[], int nr_aluno);
 int listarAluno (Ficha aluno[], int nr_aluno);
 int excluirAluno (Ficha aluno[], int nr_aluno);
