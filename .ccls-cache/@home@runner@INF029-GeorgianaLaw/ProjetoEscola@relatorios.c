@@ -37,4 +37,33 @@ int listarAlunos (Ficha aluno[], int nr_aluno){
   return 0;
 }
 
+// FUNÇAO para relatório com a lista dos professor
+
+int listarProfessores (Ficha professor[], int nr_professor){
+  int consulta, j;
+  printf("\n\nLista dos professor cadastrados \n\n");  
+  for (int i=0; i < nr_professor; i++) {
+    printf("\n\nMatrícula: %d \n",
+           professor[i].matricula);
+    printf("Nome: %s\n", professor[i].nome);
+    printf("Sexo: %c\n", professor[i].sexo);
+    printf("Data de Nascimento: %d/%d/%d\n",
+           professor[i].nascimento.dia, professor[i].nascimento.mes,
+           professor[i].nascimento.ano);
+    printf("CPF.: ");
+    for (j=0;j<3;j++)    
+        printf("%c", professor[i].cpf[j]);
+    printf(".");
+    for(j=3;j<6;j++)     
+        printf("%c", professor[i].cpf[j]);
+    printf(".");
+    for(j=6;j<9;j++)   
+        printf("%c", professor[i].cpf[j]);
+    printf("-");
+    for(j=9;j<11;j++)   
+        printf("%c", professor[i].cpf[j]);
+  }
+  return 0;
+}
+
 

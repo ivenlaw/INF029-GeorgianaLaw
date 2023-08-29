@@ -1,10 +1,8 @@
 /* Cadastro de Professores */
 
-/*
-
 #include <stdio.h>
 #include "menus.h"
-#include "alunos.h"
+//#include "alunos.h"
 #include "relatorios.h"
 #include "professores.h"
 #include <ctype.h>
@@ -96,24 +94,14 @@ int cadastarProfessor(Ficha professor[], int nr_professor) {
 // Cadastrar o CPF do professor
   
   do {
-    v=0;
     printf("\nDigite o CPF: ");
     fflush(stdin);
     fgets(professor[nr_professor].cpf, 12, stdin);
     x = strlen(professor[nr_professor].cpf) - 1;
     if (professor[nr_professor].cpf[x] == '\n')
       professor[nr_professor].cpf[x] = '\0';
-    int retorno = validadorCPF(professor);
-    if(retorno == CPF_VALIDADO){
-      printf("Cadastro concluído");
-      v=1;
-    }
-    else {
-      if(retorno == CPF_INCORRETO)
-      printf("O CPF informado está incorreto.\n");
-    }
   } while (!v);
-return 0;
+  return CADASTRO_FINALIZADO;
 }
 
 // FUNÇÃO para excluir professor
@@ -243,11 +231,11 @@ int atualizarProfessor (Ficha professor[], int nr_professor){
           size_t x = strlen(professor[nr_professor].cpf) - 1;
           if (professor[nr_professor].cpf[x] == '\n')
             professor[nr_professor].cpf[x] = '\0';
-          return CADASTRO_ATUALIZADO;
-          break;
           v=1;
         } while (!v);
       }
+      return CADASTRO_ATUALIZADO;
+      break;
     }
     else{
       return MATRICULA_INVALIDA;
@@ -297,8 +285,3 @@ int listarProfessor (Ficha professor[], int nr_professor){
   return 0;
 }
 
-
-
-
-
-*/

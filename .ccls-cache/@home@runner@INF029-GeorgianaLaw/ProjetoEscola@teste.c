@@ -1,7 +1,8 @@
 // testando
 
 int main (aluno[]) {
-  int num1, num2, num3, num4, num5, num6, num7, num8, num9, num10, num11;
+  int num1, num2, num3, num4, num5, num6, num7, n
+  um8, num9, num10, num11;
   int soma1=0, soma2=0, resto1=0, resto2=0;
 /*
   num1 = atoi(aluno[0].cpf);

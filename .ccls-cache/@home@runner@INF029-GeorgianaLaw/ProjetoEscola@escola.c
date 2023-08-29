@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "menus.h"
 #include "alunos.h"
-//#include "professores.h"
+#include "professores.h"
 #include "relatorios.h"
 #include <ctype.h>
 #include <stdlib.h>
@@ -13,8 +13,10 @@ int main () {
 
   int sairGeral = 0;
   Ficha aluno[TAM_ALUNO];
+  Ficha professor[TAM_PROFESSOR];
   int i, j, v, sexo;
   int nr_aluno = 0;
+  int nr_professor=0;
 
 // MENU GERAL
   
@@ -94,7 +96,7 @@ int main () {
                 }
               break;
               }
-              // Fazer a consulta do cadastro dos alunos
+              // Fazer a consulta do cadastro de um alunos
               case 4:{
                 if (opcao == 4) {
                   if (nr_aluno==0){
@@ -123,7 +125,84 @@ int main () {
 // opção CADASTRO DE PROFESSORES
       case 2:
         if (opcaoGeral == 2) {
-//          cadastarProfessor();
+         int sairProfessor = 0;
+          printf("\n\n*** Menu Cadastro de Professor ***\n\n");
+          int opcao = menuCadastro(professor, nr_professor);
+          // Menu inicial para Professor
+          while (!sairProfessor) {
+          // Direcionamento das opções
+            switch (opcao) {
+              // Sair do menu Professor
+              case 0:{
+                if (opcao == 0) {
+                  printf("\nSaindo do cadastro dos professor.\n\n");
+                  sairProfessor = 1;
+                }
+              break;
+              }
+              // Incluir um professor no cadastro
+              case 1:{
+                if (opcao == 1) {
+                  int retorno=cadastarProfessor(professor, nr_professor);
+                  if (retorno == CADASTRO_FINALIZADO){
+                    printf("\nCadastro finalizado.\n\n");
+                    nr_professor++;
+                  } 
+                }
+              sairProfessor = 1;
+              break;
+              }
+              // excluir um professor do cadastro
+              case 2:{
+                if (opcao == 2) {
+                  int retorno = excluirProfessor(professor, nr_professor);
+                  if(retorno == CADASTRO_EXCLUIDO){
+                    printf("\nCadastro excluído\n");
+                    nr_professor--;
+                    sairProfessor = 1;
+                  }
+                }
+              break;
+              }
+              // atualizar o cadastro do professor
+              case 3:{
+                if (opcao == 3) {
+                  int retorno = atualizarProfessor (professor, nr_professor);
+                  if(retorno==CADASTRO_ATUALIZADO) {
+                    printf("\nCadastro atualizado\n");
+                    sairProfessor = 1;
+                  }
+                  else{
+                    if (retorno==MATRICULA_INVALIDA){
+                      printf("Matrícula não localizada");
+                      sairProfessor = 1;
+                    }
+                  }
+                }
+              break;
+              }
+              // Fazer a consulta do cadastro dos professor
+              case 4:{
+                if (opcao == 4) {
+                  if (nr_professor==0){
+                    printf("\nNão há professores cadastrados.\n");
+                    sairProfessor = 1;
+                    break;
+                  }
+                  else {
+                    int retorno = listarProfessor (professor, nr_professor);
+                    sairProfessor = 1;
+                    break; 
+                  } 
+                }
+              break;
+              }
+              default: {
+                printf("Opção inválida.\n");
+                break;
+              } 
+            }
+          }
           break;
         }
 
@@ -165,7 +244,7 @@ int main () {
               // Listar professores
               case 2:{
                 if (opcaoRelatorios == 2) {
-                  printf("\nListar professores.\n\n");
+                  listarProfessores (professor, nr_professor);
                   sairRelatorio = 1;
                 }
               break;

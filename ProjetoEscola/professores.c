@@ -1,10 +1,8 @@
 /* Cadastro de Professores */
 
-
-
 #include <stdio.h>
 #include "menus.h"
-#include "alunos.h"
+//#include "alunos.h"
 #include "relatorios.h"
 #include "professores.h"
 #include <ctype.h>
@@ -233,11 +231,11 @@ int atualizarProfessor (Ficha professor[], int nr_professor){
           size_t x = strlen(professor[nr_professor].cpf) - 1;
           if (professor[nr_professor].cpf[x] == '\n')
             professor[nr_professor].cpf[x] = '\0';
-          return CADASTRO_ATUALIZADO;
-          break;
           v=1;
         } while (!v);
       }
+      return CADASTRO_ATUALIZADO;
+      break;
     }
     else{
       return MATRICULA_INVALIDA;
@@ -287,8 +285,3 @@ int listarProfessor (Ficha professor[], int nr_professor){
   return 0;
 }
 
-
-
-
-
-*/
