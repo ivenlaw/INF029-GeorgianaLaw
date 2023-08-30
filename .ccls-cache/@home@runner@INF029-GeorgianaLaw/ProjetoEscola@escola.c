@@ -5,6 +5,7 @@
 #include "alunos.h"
 #include "professores.h"
 #include "relatorios.h"
+#include "disciplinas.h"
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,9 +15,11 @@ int main () {
   int sairGeral = 0;
   Ficha aluno[TAM_ALUNO];
   Ficha professor[TAM_PROFESSOR];
+  Materia disciplina[TAM_DISCIPLINA];
   int i, j, v, sexo;
   int nr_aluno = 0;
   int nr_professor=0;
+  int nr_disciplina=0;
 
 // MENU GERAL
   
@@ -209,7 +212,85 @@ int main () {
 // opção CADASTRO DAS DISCIPLINAS    
       case 3:
         if (opcaoGeral == 3) {
-//          cadastarDisciplina();
+         int sairDisciplina = 0;
+          printf("\n\n*** Menu Cadastro de Disciplinas ***\n\n");
+          int opcao = menuDisciplina();
+          // Menu inicial para Disciplinas
+          while (!sairDisciplina) {
+          // Direcionamento das opções
+            switch (opcao) {
+              // Sair do menu Disciplina
+              case 0:{
+                if (opcao == 0) {
+                  printf("\nSaindo do cadastro das Disciplinas.\n\n");
+                  sairDisciplina = 1;
+                }
+              break;
+              }
+              // Incluir uma disciplina no cadastro
+              case 1:{
+                if (opcao == 1) {
+                  int retorno=cadastarDisciplina(disciplina, nr_disciplina, nr_professor, professor);
+                  if (retorno == CADASTRO_FINALIZADO){
+                    printf("\nCadastro finalizado.\n\n");
+                    nr_disciplina++;
+                  } 
+                }
+              sairDisciplina = 1;
+              break;
+              }
+              // excluir uma disciplina do cadastro
+              case 2:{
+                if (opcao == 2) {
+                  int retorno = excluirDisciplina(disciplina, nr_disciplina);
+                  if(retorno == CADASTRO_EXCLUIDO){
+                    printf("\nCadastro excluído\n");
+                    nr_disciplina--;
+                    sairDisciplina = 1;
+                  }
+                }
+              break;
+              }
+              // atualizar o cadastro da disciplina
+              case 3:{
+                if (opcao == 3) {
+                  int retorno = atualizarDisciplina (disciplina, nr_disciplina, nr_professor, professor);
+                  if(retorno==CADASTRO_ATUALIZADO) {
+                    printf("\nCadastro atualizado\n");
+                    sairDisciplina = 1;
+                  }
+                  else{
+                    if (retorno==CODIGO_INVALIDO){
+                      printf("Código não localizado");
+                      sairDisciplina = 1;
+                    }
+                  }
+                }
+              break;
+              }
+              // Fazer a consulta do cadastro das disciplina
+              case 4:{
+                if (opcao == 4) {
+                  if (nr_professor==0){
+                    printf("\nNão há professores cadastrados.\n");
+                    sairDisciplina = 1;
+                    break;
+                  }
+                  else {
+                    int retorno = listarDisciplina (disciplina, nr_disciplina);
+                    sairDisciplina = 1;
+                    break; 
+                  } 
+                }
+              break;
+              }
+              default: {
+                printf("Opção inválida.\n");
+                break;
+              } 
+            }
+          }
+         
          break;
         }
 // opção RELATÓRIOS
@@ -253,7 +334,7 @@ int main () {
               // Listar disciplinas
               case 3:{
                 if (opcaoRelatorios == 3) {
-                  printf("\nListar disciplinas.\n\n");
+                  listarDiscipinas(disciplina, nr_disciplina);
                   sairRelatorio = 1;
                 }
               break;

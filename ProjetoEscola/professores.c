@@ -5,6 +5,7 @@
 //#include "alunos.h"
 #include "relatorios.h"
 #include "professores.h"
+#include "disciplinas.h"
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>

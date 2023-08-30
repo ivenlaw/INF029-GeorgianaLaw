@@ -4,6 +4,8 @@
 #include "menus.h"
 #include "alunos.h"
 #include "relatorios.h"
+#include "professores.h"
+#include "disciplinas.h"
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
@@ -62,6 +64,22 @@ int listarProfessores (Ficha professor[], int nr_professor){
     printf("-");
     for(j=9;j<11;j++)   
         printf("%c", professor[i].cpf[j]);
+  }
+  return 0;
+}
+
+
+// FUNÇAO para relatório com a lista das discipinas
+
+int listarDiscipinas (Materia disciplina[], int nr_disciplina){
+  int consulta, j;
+  printf("\n\nLista das disciplinas cadastrados \n\n");  
+  for (int i=0; i < nr_disciplina; i++) {
+    printf("\n\nCódigo: %d \n",
+           disciplina[i].codigo);
+    printf("Nome: %s\n", disciplina[i].nome);
+    printf("Semestre: %c\n", disciplina[i].semestre);
+    printf("Professor: %s\n", disciplina[i].professor);
   }
   return 0;
 }

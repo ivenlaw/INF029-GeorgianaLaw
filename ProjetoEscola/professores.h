@@ -4,7 +4,7 @@
 #ifndef professores_h
 #define professores_h
 
-#define TAM_PROFESSOR 3
+
 
 // Prototipos
 

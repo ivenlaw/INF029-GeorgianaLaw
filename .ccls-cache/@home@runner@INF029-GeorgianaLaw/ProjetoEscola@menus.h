@@ -8,6 +8,8 @@
 #define menus_h
 
 #define TAM_ALUNO 3
+#define TAM_PROFESSOR 3
+#define TAM_DISCIPLINA 10
 #define MATRICULA_INVALIDA -1
 #define CADASTRO_FINALIZADO -2
 #define LISTA_VAZIA -3
@@ -15,6 +17,7 @@
 #define CADASTRO_ATUALIZADO -5
 #define CPF_VALIDADO -6
 #define CPF_INCORRETO -7
+#define CODIGO_INVALIDO -8
 
 
 // struct para datas
@@ -37,11 +40,22 @@ typedef struct {
   int ativo;
 } Ficha;
 
+typedef struct {
+
+  int codigo;
+  char nome[20];
+  int semestre;
+  char professor[51];
+  int ativo;
+} Materia;
+
+
 // Prototipos
 
 int menuGeral();
 int menuCadastro();
 int menuRelatorios();
+int menuDisciplina();
 
 
 #endif

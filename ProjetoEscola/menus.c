@@ -6,6 +6,8 @@
 #include "menus.h"
 #include "alunos.h"
 #include "relatorios.h"
+#include "professores.h"
+#include "disciplinas.h"
 
 
 // Menu geral da escola
@@ -43,7 +45,7 @@ int menuCadastro(){
   return opcao;
 }
 
-// Menu geral da escola
+// Menu Relatórios
 
 int menuRelatorios(){  
 
@@ -61,4 +63,20 @@ int menuRelatorios(){
   return opcaoRelatorios;
 }
 
+// Menu Disciplina
+
+int menuDisciplina(){  
+
+  int opcaoDisciplina;
+  
+  printf("Escolha sua opção: \n");
+  printf("0 - Sair \n");
+  printf("1 - Cadastrar \n");
+  printf("2 - Excluir \n");
+  printf("3 - Atualizar \n");
+  printf("4 - Consulta \n\n");
+  scanf("%d", &opcaoDisciplina);
+  
+  return opcaoDisciplina;
+}
 
