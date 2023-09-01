@@ -74,7 +74,8 @@ int menuDisciplina(){
   printf("1 - Cadastrar \n");
   printf("2 - Excluir \n");
   printf("3 - Atualizar \n");
-  printf("4 - Consulta \n\n");
+  printf("4 - Matricular aluno \n");
+  printf("5 - Consulta \n\n");
   scanf("%d", &opcaoDisciplina);
   
   return opcaoDisciplina;

@@ -71,7 +71,7 @@ int listarProfessores (Ficha professor[], int nr_professor){
 
 // FUNÇAO para relatório com a lista das discipinas
 
-int listarDiscipinas (Materia disciplina[], int nr_disciplina){
+int listarDiscipinas (Materia disciplina[], int nr_disciplina, int aluno_disciplina){
   int consulta, j;
   printf("\n\nLista das disciplinas cadastrados \n\n");  
   for (int i=0; i < nr_disciplina; i++) {
@@ -80,6 +80,10 @@ int listarDiscipinas (Materia disciplina[], int nr_disciplina){
     printf("Nome: %s\n", disciplina[i].nome);
     printf("Semestre: %c\n", disciplina[i].semestre);
     printf("Professor: %s\n", disciplina[i].professor);
+    printf("Alunos matriculados:");
+    for(int j=0; j<aluno_disciplina; j++){
+      printf("%d", disciplina[i].alunosMatriculados[j]);
+        }
   }
   return 0;
 }

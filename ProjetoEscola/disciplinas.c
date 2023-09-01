@@ -56,9 +56,10 @@ int cadastarDisciplina(Materia disciplina[], int nr_disciplina, int nr_professor
     int consulta;
     printf("\nQual a matricula do professor que ministra essa disciplina? \n");
     scanf("%d", &consulta);
-    for (int i = 0; i < (nr_professor); i++) {
+    for (int i = 0; i < nr_professor; i++) {
       if (professor[i].matricula == consulta) {
         strcpy (disciplina[nr_disciplina].professor,professor[i].nome);
+        break;
       }
       else{
         printf("Matrícula %d não localizada", consulta);
@@ -162,10 +163,55 @@ int atualizarDisciplina (Materia disciplina[], int nr_disciplina, int nr_profess
 }
 
 
+int matricularAluno (Materia disciplina[], int nr_disciplina, int nr_aluno, Ficha aluno[], int aluno_disciplina){
+
+  int sairMatriculando = 0;
+  int consulta, x, y, i;
+  
+  while (!sairMatriculando){
+    int opcaoMatriculando;
+    printf("\nDeseja realizar uma matricula (s/n)?");
+    scanf("%d", &consulta);
+      if(consulta =='n' || consulta == 'N') {
+        sairMatriculando=1;
+        break;
+      }
+      else if(consulta=='s' || consulta=='S'){
+        printf("Digite o codigo da disciplina: \n");
+        scanf("%d", &x);
+        for(i=0; i<=nr_disciplina; i++) {
+          if (disciplina[i].codigo == x){
+            printf("\nDigite a matricula do aluno: \n");
+            scanf("%d", &y);
+            for(i=0; i<=nr_aluno; i++){
+              if (aluno[i].matricula == y){
+                disciplina[nr_disciplina].alunosMatriculados[aluno_disciplina]= aluno[i].nome;
+                sairMatriculando=1;
+                break;
+              }  
+              else {
+                printf("Aluno não localizado.\n");
+                sairMatriculando=1;
+                break;
+              }
+            }
+          }
+          else{
+            printf("Disciplina não localizada.\n");
+            sairMatriculando=1;
+            break;
+          }
+        }
+      }
+    break;
+  }
+  return 0;
+}
+
 
 // FUNÇÃO para listar uma Disciplina
 
-int listarDisciplina (Materia disciplina[], int nr_disciplina){
+int listarDisciplina (Materia disciplina[], int nr_disciplina, int aluno_disciplina){
   int consulta, j;
   printf("\n\nDigite o código a ser consultado: \n");
   scanf("%d", &consulta);
@@ -176,6 +222,10 @@ int listarDisciplina (Materia disciplina[], int nr_disciplina){
       printf("Nome: %s\n", disciplina[i].nome);
       printf("Semestre: %d\n", disciplina[i].semestre);
       printf("Professor: %s\n", disciplina[i].professor);
+      printf("Alunos matriculados:");
+        for(int j=0; j<aluno_disciplina; j++){
+          printf("%d", disciplina[i].alunosMatriculados[j]);
+            }
       break;
     }
     else{

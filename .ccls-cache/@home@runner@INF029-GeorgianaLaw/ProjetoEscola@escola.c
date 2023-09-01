@@ -20,6 +20,8 @@ int main () {
   int nr_aluno = 0;
   int nr_professor=0;
   int nr_disciplina=0;
+  int aluno_disciplina=0;
+  
 
 // MENU GERAL
   
@@ -269,16 +271,33 @@ int main () {
                 }
               break;
               }
-              // Fazer a consulta do cadastro das disciplina
+              // Incluir aluno à disciplina
               case 4:{
                 if (opcao == 4) {
+                  if (nr_professor==0){
+                    printf("\nNão há alunos matriculados.\n");
+                    sairDisciplina = 1;
+                    break;
+                  }
+                  else {
+                    int retorno = matricularAluno (disciplina, nr_disciplina, nr_aluno, aluno, aluno_disciplina);
+                    sairDisciplina = 1;
+                    break; 
+                  } 
+                }
+              break;
+              }
+
+              // Fazer a consulta do cadastro das disciplina
+              case 5:{
+                if (opcao == 5) {
                   if (nr_professor==0){
                     printf("\nNão há professores cadastrados.\n");
                     sairDisciplina = 1;
                     break;
                   }
                   else {
-                    int retorno = listarDisciplina (disciplina, nr_disciplina);
+                    int retorno = listarDisciplina (disciplina, nr_disciplina, aluno_disciplina);
                     sairDisciplina = 1;
                     break; 
                   } 
@@ -334,7 +353,7 @@ int main () {
               // Listar disciplinas
               case 3:{
                 if (opcaoRelatorios == 3) {
-                  listarDiscipinas(disciplina, nr_disciplina);
+                  listarDiscipinas(disciplina, nr_disciplina, aluno_disciplina);
                   sairRelatorio = 1;
                 }
               break;
@@ -363,74 +382,3 @@ int main () {
   }
   return 0;
 }
-
-
-
-
-/* 
-// opção RELATÓRIOS
-
-      case 4:
-        if (opcaoGeral == 4) {
-          int sairRelatorio = 0;
-          int opcaoRelatorios = menuRelatorios();
-          // Menu inicial de Relatórios
-          while (!sairRelatorio) {
-          // Direcionamento das opções
-            switch (opcaoRelatorios) {
-              // Sair do menu Relatórios
-              case 0:{
-                if (opcaoRelatorios == 0) {
-                  printf("\nSaindo do menu Relatórios.\n\n");
-                  sairRelatorio = 1;
-                  break;
-                }
-
-              }
-
-              // Listagem de alunos
-              case 1:{
-                if (opcaoRelatorios == 1) {
-                  printf("\nListar alunos.\n\n");
-                  sairRelatorio = 1;
-                }
-              break;
-              }
-
-              // Listar professores
-              case 2:{
-                if (opcaoRelatorios == 2) {
-                  printf("\nListar professores.\n\n");
-                  sairRelatorio = 1;
-                }
-              break;
-              }
-
-              // Listar disciplinas
-              case 3:{
-                if (opcaoRelatorios == 3) {
-                  printf("\nListar disciplinas.\n\n");
-                  sairRelatorio = 1;
-                }
-              break;
-              }
-
-              // Administrativo
-              case 4:{
-                if (opcaoRelatorios == 4) {
-                  printf("\nAdministrativo.\n\n");
-                  sairRelatorio = 1;
-                }
-              break;
-              }
-
-              default: {
-                printf("Opção inválida.\n");
-                break;
-              }
-              
-            break;
-            }
-          }
-        }  
-            */
