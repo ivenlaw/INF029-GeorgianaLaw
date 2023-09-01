@@ -11,7 +11,7 @@
 
 // Prototipos
 
-int validadorCPF (Ficha aluno[], int nr_aluno);
+int validadorCPFaluno (Ficha aluno[], int nr_aluno, int x);
 int cadastarAluno(Ficha aluno[], int nr_aluno);
 int listarAluno (Ficha aluno[], int nr_aluno);
 int excluirAluno (Ficha aluno[], int nr_aluno);

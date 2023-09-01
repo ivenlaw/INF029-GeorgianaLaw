@@ -43,11 +43,12 @@ int main () {
 // opção CADASTRO DE ALUNOS 
       case 1:{
         if (opcaoGeral == 1) {
-          int sairAluno = 0;
+        int sairAluno = 0;
+         // Menu inicial para Aluno
+          while (!sairAluno) {
           printf("\n\n*** Menu Cadastro de Aluno ***\n\n");
           int opcao = menuCadastro(aluno, nr_aluno);
-          // Menu inicial para Aluno
-          while (!sairAluno) {
+       
           // Direcionamento das opções
             switch (opcao) {
               // Sair do menu Aluno
@@ -63,8 +64,8 @@ int main () {
                 if (opcao == 1) {
                   int retorno=cadastarAluno(aluno, nr_aluno);
                   if (retorno == CADASTRO_FINALIZADO){
-                    printf("\nCadastro finalizado.\n\n");
                     nr_aluno++;
+                    printf("\nCadastro finalizado.\n\n");
                   } 
                 }
               sairAluno = 1;
@@ -129,10 +130,10 @@ int main () {
       case 2:
         if (opcaoGeral == 2) {
          int sairProfessor = 0;
-          printf("\n\n*** Menu Cadastro de Professor ***\n\n");
-          int opcao = menuCadastro(professor, nr_professor);
           // Menu inicial para Professor
           while (!sairProfessor) {
+          printf("\n\n*** Menu Cadastro de Professor ***\n\n");
+          int opcao = menuCadastro(professor, nr_professor);
           // Direcionamento das opções
             switch (opcao) {
               // Sair do menu Professor
@@ -213,10 +214,10 @@ int main () {
       case 3:
         if (opcaoGeral == 3) {
          int sairDisciplina = 0;
-          printf("\n\n*** Menu Cadastro de Disciplinas ***\n\n");
-          int opcao = menuDisciplina();
           // Menu inicial para Disciplinas
           while (!sairDisciplina) {
+          printf("\n\n*** Menu Cadastro de Disciplinas ***\n\n");
+          int opcao = menuDisciplina();
           // Direcionamento das opções
             switch (opcao) {
               // Sair do menu Disciplina
@@ -290,9 +291,8 @@ int main () {
               } 
             }
           }
-         
-         break;
-        }
+        break;
+      }
 // opção RELATÓRIOS
 
       case 4:
@@ -343,7 +343,7 @@ int main () {
               // Administrativo
               case 4:{
                 if (opcaoRelatorios == 4) {
-                  printf("\nAdministrativo.\n\n");
+                  listarSexo (aluno, nr_aluno, professor, nr_professor);
                   sairRelatorio = 1;
                 }
               break;
@@ -356,10 +356,8 @@ int main () {
             }
           }
         }   
-      default: {
-        printf("\nOpção inválida.\n");
-        break;
-      }          
+      default: 
+        printf("\nOpção inválida.\n");        
     }
   }
   return 0;

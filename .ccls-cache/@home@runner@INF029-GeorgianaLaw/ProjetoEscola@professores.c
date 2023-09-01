@@ -47,8 +47,7 @@ int cadastarProfessor(Ficha professor[], int nr_professor) {
       v = 1;
     } else {
       printf("\nSexo inválido. Digite 'M' ou 'F' maiúsculos.\n");
-      v = 0;
-      getchar();
+      v=0;
     }
   } while (v == 0);
 
@@ -96,11 +95,22 @@ int cadastarProfessor(Ficha professor[], int nr_professor) {
   
   do {
     printf("\nDigite o CPF: ");
-    fflush(stdin);
     fgets(professor[nr_professor].cpf, 12, stdin);
+    fflush(stdin);
     x = strlen(professor[nr_professor].cpf) - 1;
     if (professor[nr_professor].cpf[x] == '\n')
       professor[nr_professor].cpf[x] = '\0';
+    int retorno = validadorCPFprofessor(professor, nr_professor, x);
+    if(retorno==CPF_VALIDADO){
+      printf("CPF validado");
+      v=1;
+    }
+    else {
+      if(retorno==CPF_INCORRETO){
+         printf("Cadastro com erro");
+      v=0;
+      }
+    }
   } while (!v);
   return CADASTRO_FINALIZADO;
 }
@@ -117,8 +127,9 @@ int excluirProfessor (Ficha professor[], int nr_professor) {
     if (professor[i].ativo == -1) {
       printf("Cadastro já inativo");
     }
-    else if (professor[i].matricula == consulta) {
+    else if (professor[i].matricula == consulta) 
       professor[i].ativo=-1;
+    else if (nr_professor>0){
       for(int j=i+1; j<nr_professor; j++) {
         professor[i]=professor[j];
         return CADASTRO_EXCLUIDO;
@@ -227,12 +238,22 @@ int atualizarProfessor (Ficha professor[], int nr_professor){
         int v=0;
         do {
           printf("\nDigite o CPF: ");
-          fflush(stdin);
           fgets(professor[nr_professor].cpf, 12, stdin);
+          fflush(stdin);
           size_t x = strlen(professor[nr_professor].cpf) - 1;
           if (professor[nr_professor].cpf[x] == '\n')
             professor[nr_professor].cpf[x] = '\0';
-          v=1;
+          int retorno = validadorCPFprofessor(professor, nr_professor, x);
+          if(retorno==CPF_VALIDADO){
+            printf("CPF validado");
+            v=1;
+          }
+          else {
+            if(retorno==CPF_INCORRETO){
+               printf("Cadastro com erro");
+            v=0;
+            }
+          }
         } while (!v);
       }
       return CADASTRO_ATUALIZADO;
@@ -286,3 +307,59 @@ int listarProfessor (Ficha professor[], int nr_professor){
   return 0;
 }
 
+// Validador de CPF
+  int validadorCPFprofessor (Ficha professor[], int nr_professor, int x) {
+    int i, j;
+    int num[11];
+    char *preNum;
+    int numPos;
+
+    preNum=professor[nr_professor].cpf;
+    
+    strcpy(preNum,professor[nr_professor].cpf);
+    numPos=atoi(preNum);
+    
+    int soma1=0, soma2=0, resto1=0, resto2=0;
+
+    //={atoi()};
+
+    printf("%s %d\n", preNum, numPos);
+    printf("x: %d\n", x);
+    if (x==10){
+       for(int i=0; i<11; i++){     
+         num[i]=preNum[i]-48;
+         printf("num %d: %d \n", i, num[i]);
+       }
+        for(i=10, j=0; i>1; i--){
+          soma1=soma1+(num[j]*i);
+          printf("soma1: %d\n", soma1);
+          j++;
+        }
+    
+        resto1=((soma1*10)%11);
+        printf("resto1: %d\n", resto1);
+        
+        if (resto1==num[9]) {
+          for(i=11, j=0; i>1; i--){
+            soma2=soma2+(num[j]*i);
+            printf("soma2: %d\n", soma2);
+            j++;
+          }  
+          resto2=((soma2*10)%11);
+          printf("resto1: %d\n", resto1);
+          
+          if(resto2==num[10]){
+            printf("num9: %d\n", num[9]);
+            return CPF_VALIDADO;
+          }
+          else
+            return CPF_INCORRETO;
+        }
+        else        
+          return CPF_INCORRETO;  
+    }
+    else{
+      printf("CPF incompleto, digite os 11 números. \n");
+    }
+    return 0;
+}

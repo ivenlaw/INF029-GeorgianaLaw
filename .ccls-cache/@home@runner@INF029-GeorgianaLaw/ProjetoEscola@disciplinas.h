@@ -1,6 +1,7 @@
 /* Projeto Escola */
 
 #include "menus.h"
+#include "professores.h"
 #ifndef disciplinas_h
 #define disciplinas_h
 

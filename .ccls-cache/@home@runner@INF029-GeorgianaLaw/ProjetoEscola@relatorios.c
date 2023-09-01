@@ -84,4 +84,75 @@ int listarDiscipinas (Materia disciplina[], int nr_disciplina){
   return 0;
 }
 
+// FUNÇAO para relatório com a lista dos alunos por sexo
 
+int listarSexo (Ficha aluno[], int nr_aluno, Ficha professor[], int nr_professor){
+  
+  int j;
+  int v=0;
+  int sairSexo=0;
+
+  while (!sairSexo) {
+    int opcao;
+    printf("Deseja o relatorio de: \n");
+    printf("0 - Sair \n");
+    printf("1 - Alunos\n");
+    printf("2 - Professores  \n\n");
+    scanf("%d", &opcao);
+
+    switch (opcao) {
+      // Sair do menu listar sexo
+      case 0:{
+        if (opcao == 0) {
+          printf("\nSaindo da listagem por sexo.\n\n");
+          sairSexo = 1;
+        }
+      break;
+      }
+      case 1: 
+        if (opcao == 1) {
+          printf("\nDigite o sexo dos alunos a ser consutado: \n");  
+          int consulta=getchar();
+          if (aluno[nr_aluno].sexo == 'F' || aluno[nr_aluno].sexo == 'f') {
+            printf("\n\nLista das alunas do sexo feminino cadastrados \n\n");
+            for (int i=0; i < nr_aluno; i++) {
+               if(aluno[nr_aluno].sexo == 'F' || aluno[nr_aluno].sexo == 'f')
+               printf("Sexo: %c\n", aluno[i].sexo);
+            }
+          }
+          else if (aluno[nr_aluno].sexo == 'M' || aluno[nr_aluno].sexo == 'm') {
+              printf("\n\nLista dos alunos do sexo masculino cadastrados \n\n");
+            for (int i=0; i < nr_aluno; i++) {
+               if(aluno[nr_aluno].sexo == 'M' || aluno[nr_aluno].sexo == 'm')
+               printf("Sexo: %c\n", aluno[i].sexo);
+            }
+          }
+        break;
+        }
+      case 2: 
+        if (opcao == 2) {
+                    printf("\nDigite o sexo dos professores a ser consutado: \n");  
+          int consulta=getchar();
+          if (professor[nr_professor].sexo == 'F' || professor[nr_professor].sexo == 'f') {
+            printf("\n\nLista das professoras do sexo feminino cadastrados \n\n");
+            for (int i=0; i < nr_professor; i++) {
+               if(professor[nr_professor].sexo == 'F' || professor[nr_professor].sexo == 'f')
+               printf("Sexo: %c\n", professor[i].sexo);
+            }
+          }
+          else if (professor[nr_professor].sexo == 'M' || professor[nr_professor].sexo == 'm') {
+              printf("\n\nLista dos professores do sexo masculino cadastrados \n\n");
+            for (int i=0; i < nr_professor; i++) {
+               if(professor[nr_professor].sexo == 'M' || professor[nr_professor].sexo == 'm')
+               printf("Sexo: %c\n", professor[i].sexo);
+            }
+          }
+        break;
+        }
+      default: {
+        printf("Opção inválida.\n");
+        break;
+      }
+  }
+}
+}

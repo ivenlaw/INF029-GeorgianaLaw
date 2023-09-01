@@ -45,8 +45,7 @@ int cadastarAluno(Ficha aluno[], int nr_aluno) {
       v = 1;
     } else {
       printf("\nSexo inválido. Digite 'M' ou 'F' maiúsculos.\n");
-      v = 0;
-      getchar();
+      v=0;
     }
   } while (v == 0);
 
@@ -94,11 +93,22 @@ int cadastarAluno(Ficha aluno[], int nr_aluno) {
   
   do {
     printf("\nDigite o CPF: ");
-    fflush(stdin);
     fgets(aluno[nr_aluno].cpf, 12, stdin);
+    fflush(stdin);
     x = strlen(aluno[nr_aluno].cpf) - 1;
     if (aluno[nr_aluno].cpf[x] == '\n')
       aluno[nr_aluno].cpf[x] = '\0';
+    int retorno = validadorCPFaluno(aluno, nr_aluno, x);
+    if(retorno==CPF_VALIDADO){
+      printf("CPF validado");
+      v=1;
+    }
+    else {
+      if(retorno==CPF_INCORRETO){
+         printf("Cadastro com erro");
+      v=0;
+      }
+    }
   } while (!v);
   return CADASTRO_FINALIZADO;
 }
@@ -108,22 +118,28 @@ int cadastarAluno(Ficha aluno[], int nr_aluno) {
 int excluirAluno (Ficha aluno[], int nr_aluno) {
 
   int consulta, i;
-  printf("Digite a matrícula a ser excluida: ");
+  printf("Digite a matrícula a ser excluida: \n");
   scanf("%d", &consulta);
 
   for (i=0; i<nr_aluno; i++) {
     if (aluno[i].ativo == -1) {
       printf("Cadastro já inativo");
+      break;
     }
     else if (aluno[i].matricula == consulta) {
       aluno[i].ativo=-1;
-      for(int j=i+1; j<nr_aluno; j++) {
-        aluno[i]=aluno[j];
-        return CADASTRO_EXCLUIDO;
-        break;
+      if (nr_aluno>0) {
+        for(int j=i+1; j<nr_aluno; j++) {
+          aluno[i]=aluno[j];
+        }
       }
+    return CADASTRO_EXCLUIDO;
+    break;
     }
-  }
+    else
+      return MATRICULA_INVALIDA;
+    break;
+    }
   return 0;
 }
 
@@ -284,43 +300,60 @@ int listarAluno (Ficha aluno[], int nr_aluno){
   return 0;
 }
 
-
-/*
 // Validador de CPF
-  int validadorCPF (int v[12]) {
-    int num1, num2, num3, num4, num5, num6, num7, num8, num9, num10, num11,
-soma1, soma2, resto1, resto2;
+  int validadorCPFaluno (Ficha aluno[], int nr_aluno, int x) {
+    int i, j;
+    int num[11];
+    char *preNum;
+    int numPos;
+    
+    preNum=aluno[nr_aluno].cpf;
+    
+    strcpy(preNum,aluno[nr_aluno].cpf);
+    numPos=atoi(preNum);
+    
+    int soma1=0, soma2=0, resto1=0, resto2=0;
 
-    num1 = atoi(v[1]);
-    num2 = atoi(v[2]);
-    num3 = atoi(v[3]);
-    num4 = atoi(v[4]);
-    num5 = atoi(v[5]);
-    num6 = atoi(v[6]);
-    num7 = atoi(v[7]);
-    num8 = atoi(v[8]);
-    num9 = atoi(v[9]);
-    num10 = atoi(v[10]);
-    num11 = atoi(v[11]);
-    }
-    soma1=((num1*10)+(num2*9)+(num3*8)+(num4*7)+(num5*6)+(num6*5)+(num7*4)+(num8*3)+(num9*2));
-    resto1%=((soma1*10)/11);
-    if (resto1==v[10]) {
-      soma2=((num1*11)+(num2*10)+(num3*9)+(num4*8)+(num5*7)+(num6*6)+(num7*5)+(num8*4)+(num9*3)+(num10*2));
-      resto2%=((soma2*10)/11);
-      if(resto2==v[11])
-        return 1;
-      else
-        return 0;
-    }
-    else
-      return 0;
-  } */
+    //={atoi()};
 
-/* usa um for para ler cada caracter do cpf
-          //Percorrendo o vetor de char e mostrando
-         //cada elemento individualmente
-          for (i=0; i<6; i++)
-{
-  printf("Valor do elemento %d da string = %c\n",i, texto[i]);
-}  */
+    printf("%s %d\n", preNum, numPos);
+    printf("x: %d\n", x);
+    if (x==10){
+       for(int i=0; i<11; i++){     
+         num[i]=preNum[i]-48;
+         printf("num %d: %d \n", i, num[i]);
+       }
+        for(i=10, j=0; i>1; i--){
+          soma1=soma1+(num[j]*i);
+          printf("soma1: %d\n", soma1);
+          j++;
+        }
+    
+        resto1=((soma1*10)%11);
+        printf("resto1: %d\n", resto1);
+        
+        if (resto1==num[9]) {
+          for(i=11, j=0; i>1; i--){
+            soma2=soma2+(num[j]*i);
+            printf("soma2: %d\n", soma2);
+            j++;
+          }  
+          resto2=((soma2*10)%11);
+          printf("resto1: %d\n", resto1);
+          
+          if(resto2==num[10]){
+            printf("num9: %d\n", num[9]);
+            return CPF_VALIDADO;
+          }
+          else
+            return CPF_INCORRETO;
+        }
+        else        
+          return CPF_INCORRETO;  
+    }
+    else{
+      printf("CPF incompleto, digite os 11 números. \n");
+    }
+    return 0;
+}
+

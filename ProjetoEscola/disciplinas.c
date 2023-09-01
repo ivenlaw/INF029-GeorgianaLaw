@@ -40,36 +40,32 @@ int cadastarDisciplina(Materia disciplina[], int nr_disciplina, int nr_professor
   
   do {
     printf("\nInforme o semestre da disciplina: (do 1 ao 8): ");
-    disciplina[nr_disciplina].semestre = getchar();
-    if (disciplina[nr_disciplina].semestre >= 1 || disciplina[nr_disciplina].semestre <= 8) {
+    scanf("%d", &disciplina[nr_disciplina].semestre);
+    getchar();
+    if (disciplina[nr_disciplina].semestre >= 1 || disciplina[nr_disciplina].semestre <= 8) {      
       v = 1;
     } else {
       printf("\nSemestre inválido. Digite valor entre 1 e 8.\n");
-      v = 0;
-      getchar();
+
     }
   } while (v == 0);
 
 // Cadastrar o professor vinculado a disciplina
 
-    do {
-    int consulta, v=0;
-    printf("\n\nQual a matricula do professor que ministra essa disciplina? \n");
+  do {
+    int consulta;
+    printf("\nQual a matricula do professor que ministra essa disciplina? \n");
     scanf("%d", &consulta);
     for (int i = 0; i < (nr_professor); i++) {
-    if (professor[i].matricula == consulta) {
-      strcpy (disciplina[nr_disciplina].professor,professor[i].nome);
-      v=1;
-      break;
+      if (professor[i].matricula == consulta) {
+        strcpy (disciplina[nr_disciplina].professor,professor[i].nome);
+      }
+      else{
+        printf("Matrícula %d não localizada", consulta);
+      }
     }
-    else{
-      printf("Matrícula %d não localizada", consulta);
-      break;
-    }
-    }
-    v=1;
-    } while (!v);
-  return 0;  
+  } while (!v); 
+  return CADASTRO_FINALIZADO; 
 }
 
 
@@ -85,8 +81,9 @@ int excluirDisciplina (Materia disciplina[], int nr_disciplina) {
     if (disciplina[i].ativo == -1) {
       printf("Cadastro já inativo");
     }
-    else if (disciplina[i].codigo == consulta) {
+    else if (disciplina[i].codigo == consulta) 
       disciplina[i].ativo=-1;
+    else if (nr_disciplina>0) {
       for(int j=i+1; j<nr_disciplina; j++) {
         disciplina[i]=disciplina[j];
         return CADASTRO_EXCLUIDO;
@@ -122,14 +119,15 @@ int atualizarDisciplina (Materia disciplina[], int nr_disciplina, int nr_profess
           disciplina[i].nome[x] = '\0';
       }
       // TROCA do semestre
-      printf("\nDeseja alterar o semestre '%c'? ", disciplina[i].semestre);
-      scanf("%s", &troca);
+      printf("\nDeseja alterar o semestre '%d'? ", disciplina[i].semestre);
+      scanf("%c", &troca);
       getchar();
       if((troca=='s') || (troca=='S')) {
         int v=0;
         do {
           printf("\nDigite o novo semestre (de 1 a 8): ");
-          disciplina[i].semestre = getchar();
+          scanf("%d", &disciplina[nr_disciplina].semestre);
+          getchar();
           if (disciplina[nr_disciplina].semestre >= 1 || disciplina[nr_disciplina].semestre <= 8) {
             v = 1;
           } else {
@@ -160,11 +158,12 @@ int atualizarDisciplina (Materia disciplina[], int nr_disciplina, int nr_profess
     }
     break;
   }
+  return 0;
 }
 
 
 
-// FUNÇÃO para listar um Disciplina
+// FUNÇÃO para listar uma Disciplina
 
 int listarDisciplina (Materia disciplina[], int nr_disciplina){
   int consulta, j;
@@ -175,7 +174,7 @@ int listarDisciplina (Materia disciplina[], int nr_disciplina){
       printf("\n** Cadastro do código %d **\n\n",
              disciplina[i].codigo);
       printf("Nome: %s\n", disciplina[i].nome);
-      printf("Semestre: %c\n", disciplina[i].semestre);
+      printf("Semestre: %d\n", disciplina[i].semestre);
       printf("Professor: %s\n", disciplina[i].professor);
       break;
     }
