@@ -93,66 +93,101 @@ int listarSexo (Ficha aluno[], int nr_aluno, Ficha professor[], int nr_professor
   int sairSexo=0;
 
   while (!sairSexo) {
-    int opcao;
-    printf("Deseja o relatorio de: \n");
+    int opcaoSexo;
+    printf("\nDeseja o relatorio de: \n");
     printf("0 - Sair \n");
     printf("1 - Alunos\n");
     printf("2 - Professores  \n\n");
-    scanf("%d", &opcao);
+    scanf("%d", &opcaoSexo);
 
-    switch (opcao) {
+    switch (opcaoSexo) {
       // Sair do menu listar sexo
       case 0:{
-        if (opcao == 0) {
+        if (opcaoSexo == 0) {
           printf("\nSaindo da listagem por sexo.\n\n");
           sairSexo = 1;
         }
       break;
       }
-      case 1: 
-        if (opcao == 1) {
-          printf("\nDigite o sexo dos alunos a ser consutado: \n");  
-          int consulta=getchar();
-          if (aluno[nr_aluno].sexo == 'F' || aluno[nr_aluno].sexo == 'f') {
-            printf("\n\nLista das alunas do sexo feminino cadastrados \n\n");
-            for (int i=0; i < nr_aluno; i++) {
-               if(aluno[nr_aluno].sexo == 'F' || aluno[nr_aluno].sexo == 'f')
-               printf("Sexo: %c\n", aluno[i].sexo);
+      case 1: {
+        if (opcaoSexo == 1) {
+          int opcaoSexoAluno;
+          int sairSexoAluno=0;
+          while (!sairSexoAluno){
+            printf("\nDigite o sexo dos alunos a ser consultado: \n");
+            printf("0 - Sair \n");
+            printf("1 - Feminino \n");
+            printf("2 - Masculino \n\n");
+            scanf("%d", &opcaoSexoAluno);
+            if (opcaoSexoAluno == 0) {
+              printf("\nSaindo.\n\n");
+              sairSexoAluno = 1;
             }
-          }
-          else if (aluno[nr_aluno].sexo == 'M' || aluno[nr_aluno].sexo == 'm') {
-              printf("\n\nLista dos alunos do sexo masculino cadastrados \n\n");
-            for (int i=0; i < nr_aluno; i++) {
-               if(aluno[nr_aluno].sexo == 'M' || aluno[nr_aluno].sexo == 'm')
-               printf("Sexo: %c\n", aluno[i].sexo);
+            else if (opcaoSexoAluno == 1) {
+              printf("\n\nLista das alunas do sexo feminino cadastrados \n\n");
+              for (int i=0; i < nr_aluno; i++) {
+                 if(aluno[i].sexo == 'F' || aluno[i].sexo == 'f')
+                 printf("Aluna: %s\n", aluno[i].nome);
+              }
+              sairSexoAluno=1;
+              break;
             }
+            else if (opcaoSexoAluno == 2) {
+                printf("\n\nLista dos alunos do sexo masculino cadastrados \n\n");
+              for (int i=0; i < nr_aluno; i++) {
+                 if(aluno[i].sexo == 'M' || aluno[i].sexo == 'm')
+                 printf("Aluno: %s\n", aluno[i].nome);
+              }
+              sairSexoAluno=1;
+              break;
+            }
+          break;
           }
-        break;
         }
-      case 2: 
-        if (opcao == 2) {
-                    printf("\nDigite o sexo dos professores a ser consutado: \n");  
-          int consulta=getchar();
-          if (professor[nr_professor].sexo == 'F' || professor[nr_professor].sexo == 'f') {
-            printf("\n\nLista das professoras do sexo feminino cadastrados \n\n");
-            for (int i=0; i < nr_professor; i++) {
-               if(professor[nr_professor].sexo == 'F' || professor[nr_professor].sexo == 'f')
-               printf("Sexo: %c\n", professor[i].sexo);
-            }
-          }
-          else if (professor[nr_professor].sexo == 'M' || professor[nr_professor].sexo == 'm') {
-              printf("\n\nLista dos professores do sexo masculino cadastrados \n\n");
-            for (int i=0; i < nr_professor; i++) {
-               if(professor[nr_professor].sexo == 'M' || professor[nr_professor].sexo == 'm')
-               printf("Sexo: %c\n", professor[i].sexo);
-            }
-          }
-        break;
-        }
-      default: {
-        printf("Opção inválida.\n");
         break;
       }
+      case 2:{ 
+        if (opcaoSexo == 2) {
+          int opcaoSexoProfessor;
+          int sairSexoProfessor=0;
+          while (!sairSexoProfessor){
+            printf("\nDigite o sexo dos professores a ser consutado: \n");  
+            printf("0 - Sair \n");
+            printf("1 - Feminino \n");
+            printf("2 - Masculino \n\n");
+            scanf("%d", &opcaoSexoProfessor);
+            if (opcaoSexoProfessor == 0) {
+              printf("\nSaindo.\n\n");
+              sairSexoProfessor = 1;
+            }
+            else if (opcaoSexoProfessor == 1) {
+              printf("\n\nLista das professoras do sexo feminino cadastrados \n\n");
+              for (int i=0; i < nr_professor; i++) {
+                 if(professor[i].sexo == 'F' || professor[i].sexo == 'f')
+                 printf("Professora: %s\n", professor[i].nome);
+              }
+              sairSexoProfessor = 1;
+              break;
+            }
+            else if (opcaoSexoProfessor == 2) {
+                printf("\n\nLista dos professores do sexo masculino cadastrados \n\n");
+              for (int i=0; i < nr_professor; i++) {
+                 if(professor[i].sexo == 'M' || professor[i].sexo == 'm')
+                 printf("Professor: %s\n", professor[i].nome);
+              }
+              sairSexoProfessor=1;
+              break;
+            }
+          break;
+        }
+        break;
+      }
+      }
+    default: {
+      printf("Opção inválida.\n");
+      break;
+    }
   }
 }
+  return 0;
 }

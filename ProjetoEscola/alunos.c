@@ -330,6 +330,8 @@ int listarAluno (Ficha aluno[], int nr_aluno){
         }
     
         resto1=((soma1*10)%11);
+        if(resto1==10)
+          resto1=0;
         printf("resto1: %d\n", resto1);
         
         if (resto1==num[9]) {
