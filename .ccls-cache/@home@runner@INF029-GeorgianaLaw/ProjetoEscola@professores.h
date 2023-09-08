@@ -1,6 +1,6 @@
 /* Projeto Escola */
 
-#include "menus.h"
+#include "geral.h"
 #ifndef professores_h
 #define professores_h
 

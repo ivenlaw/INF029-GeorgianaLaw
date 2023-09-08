@@ -1,6 +1,6 @@
 /* Projeto Escola */
 
-#include "menus.h"
+#include "geral.h"
 #ifndef relatorios_h
 #define relatorios_h
 

@@ -1,16 +1,13 @@
 // Modularização referente aos cadastros no Projeto Escola
 
-//#include <stdio.h>
-//#include <string.h>
-//#include <stdlib.h>
-//#include "alunos.h"
-#ifndef menus_h
-#define menus_h
+#ifndef geral_h
+#define geral_h
 
 #define TAM_ALUNO 3
 #define TAM_PROFESSOR 3
 #define TAM_DISCIPLINA 10
 #define ALUNO_MATRICULADO 50
+#define TAM_LINHA_FICHA 100
 #define MATRICULA_INVALIDA -1
 #define CADASTRO_FINALIZADO -2
 #define LISTA_VAZIA -3
@@ -58,6 +55,9 @@ int menuGeral();
 int menuCadastro();
 int menuRelatorios();
 int menuDisciplina();
+int aberturaArquivo (Ficha aluno[]);
+void fechaAluno(Ficha aluno[], int nr_aluno);
+void carregarAluno(char linha[], Ficha aluno[]);
 
 
 #endif

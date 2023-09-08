@@ -1,7 +1,7 @@
 /* Cadastro de Professores */
 
 #include <stdio.h>
-#include "menus.h"
+#include "geral.h"
 //#include "alunos.h"
 #include "relatorios.h"
 #include "professores.h"

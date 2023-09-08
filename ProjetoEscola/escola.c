@@ -1,7 +1,7 @@
 // Arquivo central do Projeto Escola
 
 #include <stdio.h>
-#include "menus.h"
+#include "geral.h"
 #include "alunos.h"
 #include "professores.h"
 #include "relatorios.h"
@@ -21,7 +21,13 @@ int main () {
   int nr_professor=0;
   int nr_disciplina=0;
   int aluno_disciplina=0;
-  
+
+
+// ABERTURA E RECUPERAÇÃO DO ARQUIVO DE DADOS
+
+  printf("antes %d\n", nr_aluno);
+  nr_aluno = aberturaArquivo (aluno);
+  printf("depois %d", nr_aluno);
 
 // MENU GERAL
   
@@ -38,6 +44,7 @@ int main () {
       case 0:
         if (opcaoGeral == 0) {
           printf("\nSistema da escola encerrado.\n\n");
+          fechaAluno(aluno, nr_aluno);
           sairGeral = 1;
           break;
         }
@@ -57,6 +64,7 @@ int main () {
               case 0:{
                 if (opcao == 0) {
                   printf("\nSaindo do cadastro dos alunos.\n\n");
+                  
                   sairAluno = 1;
                 }
               break;
@@ -380,5 +388,6 @@ int main () {
         printf("\nOpção inválida.\n");        
     }
   }
+  
   return 0;
 }

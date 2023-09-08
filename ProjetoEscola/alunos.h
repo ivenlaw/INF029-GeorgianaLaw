@@ -1,7 +1,7 @@
 /* Projeto Escola */
 
 //#include <stdio.h>
-#include "menus.h"
+#include "geral.h"
 //#include <stdlib.h>
 //#include <string.h>
 #ifndef alunos_h
