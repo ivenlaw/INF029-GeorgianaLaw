@@ -57,7 +57,7 @@ int menuRelatorios();
 int menuDisciplina();
 int aberturaArquivo (Ficha aluno[]);
 void fechaAluno(Ficha aluno[], int nr_aluno);
-void carregarAluno(char linha[], Ficha aluno[]);
+void carregarAluno(char linha[], Ficha aluno[], int nr_aluno);
 
 
 #endif

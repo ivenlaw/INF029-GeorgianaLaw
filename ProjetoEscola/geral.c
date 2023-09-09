@@ -95,7 +95,7 @@ int aberturaArquivo (Ficha aluno[]){
   else {
     do {
       fgets(linha, TAM_LINHA_FICHA, abrirArquivo);
-      carregarAluno(linha, aluno);
+      carregarAluno(linha, aluno, nr_aluno);
       nr_aluno++;
     } while (!feof(abrirArquivo));
   }
@@ -105,7 +105,7 @@ int aberturaArquivo (Ficha aluno[]){
 void fechaAluno(Ficha aluno[], int nr_aluno){
 
   FILE* abrirArquivo;
-  abrirArquivo = fopen("fichasAluno.txt", "w+");
+  abrirArquivo = fopen("fichasAluno.txt", "w");
   char linha[80];
   int i;
   
@@ -131,49 +131,51 @@ void fechaAluno(Ficha aluno[], int nr_aluno){
   
 }
 
-void carregarAluno(char linha[], Ficha aluno[]) {
+void carregarAluno(char linha[], Ficha aluno[], int nr_aluno) {
 
   char *tok;
 
+  printf("%s", linha);
+  
   int cont = 1;
   tok = strtok(linha, ";");
 
   while (tok != 0) {
     switch (cont) {
     case 1: {
-      aluno->matricula = atoi(tok);
+      aluno[nr_aluno].matricula = atoi(tok);
       break;
     }
     case 2: {
-      strcpy(aluno->nome, tok);
+      strcpy(aluno[nr_aluno].nome, tok);
       break;
     }
     case 3: {
-      aluno->sexo=*tok;
+      aluno[nr_aluno].sexo=*tok;
       break;
     }
     case 4: {
-      aluno->nascimento.dia = atoi(tok);
+      aluno[nr_aluno].nascimento.dia = atoi(tok);
       break;
     }
     case 5: {
-      aluno->nascimento.mes = atoi(tok);
+      aluno[nr_aluno].nascimento.mes = atoi(tok);
       break;
     }
     case 6: {
-      aluno->nascimento.ano = atoi(tok);
+      aluno[nr_aluno].nascimento.ano = atoi(tok);
       break;
     }
     case 7: {
-      strcpy(aluno->cpf, tok);
+      strcpy(aluno[nr_aluno].cpf, tok);
       break;
     }
     case 8: {
-      strcpy(aluno->cpf, tok);
+      aluno[nr_aluno].ativo = atoi(tok);
       break;
     }
     }
-    printf("%s\n", tok);
+    printf(" %s\n", tok);
     tok = strtok(0, ";");
     cont++;
   }
