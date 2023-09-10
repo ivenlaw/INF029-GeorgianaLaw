@@ -7,7 +7,9 @@
 #define TAM_PROFESSOR 3
 #define TAM_DISCIPLINA 10
 #define ALUNO_MATRICULADO 50
-#define TAM_LINHA_FICHA 100
+#define TAM_ALUNO_FICHA 100
+#define TAM_PROF_FICHA 100
+#define TAM_DISC_FICHA 20
 #define MATRICULA_INVALIDA -1
 #define CADASTRO_FINALIZADO -2
 #define LISTA_VAZIA -3
@@ -44,7 +46,7 @@ typedef struct {
   char nome[20];
   int semestre;
   char professor[51];
-  int alunosMatriculados[50];
+  char alunosMatriculados[50];
   int ativo;
 } Materia;
 
@@ -55,9 +57,14 @@ int menuGeral();
 int menuCadastro();
 int menuRelatorios();
 int menuDisciplina();
-int aberturaArquivo (Ficha aluno[]);
+int aberturaArquivoAluno (Ficha aluno[]);
 void fechaAluno(Ficha aluno[], int nr_aluno);
-void carregarAluno(char linha[], Ficha aluno[], int nr_aluno);
-
+void carregarAluno(char linhaAluno[], Ficha aluno[], int nr_aluno);
+int aberturaArquivoProfessor (Ficha professor[]);
+void fechaProfessor(Ficha professor[], int nr_professor);
+void carregarProfessor(char linhaProfessor[], Ficha professor[], int nr_professor);
+int aberturaArquivoDisciplina (Materia disciplina[], int nr_professor, Ficha professor[]);
+void fechaDisciplina(Materia disciplina[], int nr_disciplina, int nr_professor, Ficha professor[], Ficha aluno[], int aluno_disciplina, int nr_aluno);
+void carregarDisciplina(char linhaDisciplina[], Materia disciplina[], int nr_disciplina, int nr_professor, Ficha professor[]);
 
 #endif

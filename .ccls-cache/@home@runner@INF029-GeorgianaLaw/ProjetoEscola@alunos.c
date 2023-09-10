@@ -13,9 +13,6 @@
 int cadastarAluno(Ficha aluno[], int nr_aluno) {
 
   int v;
-//  Ficha aluno[TAM_ALUNO];
-//  int i, j, opcao, v, sexo;
-//  int nr_aluno = 0;
 
 // Cadastrar matrícula do aluno
   

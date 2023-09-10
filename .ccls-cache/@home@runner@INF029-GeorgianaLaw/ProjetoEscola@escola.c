@@ -25,9 +25,9 @@ int main () {
 
 // ABERTURA E RECUPERAÇÃO DO ARQUIVO DE DADOS
 
-  printf("antes %d\n", nr_aluno);
-  nr_aluno = aberturaArquivo (aluno);
-  printf("depois %d", nr_aluno);
+  nr_aluno = aberturaArquivoAluno (aluno);
+  nr_professor = aberturaArquivoProfessor (professor);
+  nr_disciplina = aberturaArquivoDisciplina (disciplina, nr_professor, professor);
 
 // MENU GERAL
   
@@ -45,6 +45,8 @@ int main () {
         if (opcaoGeral == 0) {
           printf("\nSistema da escola encerrado.\n\n");
           fechaAluno(aluno, nr_aluno);
+          fechaProfessor(professor, nr_professor);
+          fechaDisciplina(disciplina, nr_disciplina, nr_professor, professor, aluno, aluno_disciplina, nr_aluno);
           sairGeral = 1;
           break;
         }
