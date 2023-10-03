@@ -236,3 +236,92 @@ int listarDisciplina (Materia disciplina[], int nr_disciplina, int aluno_discipl
   return 0;
 }
 
+int aberturaArquivoDisciplina (Materia disciplina[], int nr_professor, Ficha professor[]){
+
+  FILE* abrirArquivoDisciplina;
+  char linhaDisciplina[TAM_DISC_FICHA];
+  int nr_disciplina=0;
+
+  abrirArquivoDisciplina = fopen("fichasDisciplina.txt", "r");
+  if(abrirArquivoDisciplina==0){
+    printf("Arquivo de dados não disponível. Criando novo arquivo!");
+    abrirArquivoDisciplina = fopen("fichasDisciplina.txt", "w");
+  }
+  else {
+    do {
+      fgets(linhaDisciplina, TAM_DISC_FICHA, abrirArquivoDisciplina);
+      carregarDisciplina (linhaDisciplina, disciplina, nr_disciplina, nr_professor, professor);
+      nr_disciplina++;
+    } while (!feof(abrirArquivoDisciplina));
+  }
+  return nr_disciplina;
+}
+
+void fechaDisciplina(Materia disciplina[], int nr_disciplina, int nr_professor, Ficha professor[], Ficha aluno[], int aluno_disciplina, int nr_aluno){
+
+  FILE* abrirArquivoDisciplina;
+  abrirArquivoDisciplina = fopen("fichasDisciplina.txt", "w+");
+  //char linhaDisciplina[80];
+  int i;
+  
+  for (i = 0; i < nr_disciplina; i++) {
+    fprintf(abrirArquivoDisciplina, "%d", disciplina[i].codigo);
+    fputs(";", abrirArquivoDisciplina);
+    fputs(disciplina[i].nome, abrirArquivoDisciplina);
+    fputs(";", abrirArquivoDisciplina);
+    fputc(disciplina[i].semestre, abrirArquivoDisciplina);
+    fputs(";", abrirArquivoDisciplina);
+    fprintf(abrirArquivoDisciplina, "%s", disciplina[i].professor);
+    fputs(";", abrirArquivoDisciplina);
+    fprintf(abrirArquivoDisciplina, "%s", disciplina[i].alunosMatriculados);
+    fputs(";", abrirArquivoDisciplina);
+    fprintf(abrirArquivoDisciplina, "%d", disciplina[i].ativo);
+    if (i < nr_disciplina - 1)
+      fputs("\n", abrirArquivoDisciplina);
+  }
+  
+  fclose(abrirArquivoDisciplina);
+  
+}
+
+void carregarDisciplina(char linhaDisciplina[], Materia disciplina[], int nr_disciplina, int nr_professor, Ficha professor[]) {
+
+  char *tokD;
+
+  printf("%s", linhaDisciplina);
+  
+  int cont = 1;
+  tokD = strtok(linhaDisciplina, ";");
+
+  while (tokD != 0) {
+    switch (cont) {
+    case 1: {
+      disciplina[nr_disciplina].codigo = atoi(tokD);
+      break;
+    }
+    case 2: {
+      strcpy(disciplina[nr_disciplina].nome, tokD);
+      break;
+    }
+    case 3: {
+      disciplina[nr_disciplina].semestre=*tokD;
+      break;
+    }
+    case 4: {
+      strcpy(disciplina[nr_disciplina].professor, tokD);
+      break;
+    }
+    case 5: {
+      strcpy(disciplina[nr_disciplina].alunosMatriculados, tokD);
+      break;
+    }
+    case 6: {
+      disciplina[nr_disciplina].ativo = atoi(tokD);
+      break;
+    }
+    }
+    printf(" %s\n", tokD);
+    tokD = strtok(0, ";");
+    cont++;
+  }
+}

@@ -355,3 +355,105 @@ int listarProfessor (Ficha professor[], int nr_professor){
     }
     return 0;
 }
+
+
+
+int aberturaArquivoProfessor (Ficha professor[]){
+
+  FILE* abrirArquivoProfessor;
+  char linhaProfessor[TAM_PROF_FICHA];
+  int nr_professor=0;
+
+  abrirArquivoProfessor = fopen("fichasProfessor.txt", "r");
+  if(abrirArquivoProfessor==0){
+    printf("Arquivo de dados não disponível. Criando novo arquivo!");
+    abrirArquivoProfessor = fopen("fichasProfessor.txt", "w");
+  }
+  else {
+    do {
+      fgets(linhaProfessor, TAM_PROF_FICHA, abrirArquivoProfessor);
+      carregarProfessor (linhaProfessor, professor, nr_professor);
+      nr_professor++;
+    } while (!feof(abrirArquivoProfessor));
+  }
+  return nr_professor;
+}
+
+void fechaProfessor(Ficha professor[], int nr_professor){
+
+  FILE* abrirArquivoProfessor;
+  abrirArquivoProfessor = fopen("fichasProfessor.txt", "w+");
+//  char linhaProfessor[80];
+  int i;
+  
+  for (i = 0; i < nr_professor; i++) {
+    fprintf(abrirArquivoProfessor, "%d", professor[i].matricula);
+    fputs(";", abrirArquivoProfessor);
+    fputs(professor[i].nome, abrirArquivoProfessor);
+    fputs(";", abrirArquivoProfessor);
+    fputc(professor[i].sexo, abrirArquivoProfessor);
+    fputs(";", abrirArquivoProfessor);
+    fprintf(abrirArquivoProfessor, "%d;%d;%d", professor[i].nascimento.dia,
+            professor[i].nascimento.mes,
+            professor[i].nascimento.ano);
+    fputs(";", abrirArquivoProfessor);
+    fputs(professor[i].cpf, abrirArquivoProfessor);
+    fputs(";", abrirArquivoProfessor);
+    fprintf(abrirArquivoProfessor, "%d", professor[i].ativo);
+    if (i < nr_professor - 1)
+      fputs("\n", abrirArquivoProfessor);
+  }
+  
+  fclose(abrirArquivoProfessor);
+  
+}
+
+void carregarProfessor(char linhaProfessor[], Ficha professor[], int nr_professor) {
+
+  char *tokP;
+
+  printf("%s", linhaProfessor);
+  
+  int cont = 1;
+  tokP = strtok(linhaProfessor, ";");
+
+  while (tokP != 0) {
+    switch (cont) {
+    case 1: {
+      professor[nr_professor].matricula = atoi(tokP);
+      break;
+    }
+    case 2: {
+      strcpy(professor[nr_professor].nome, tokP);
+      break;
+    }
+    case 3: {
+      professor[nr_professor].sexo=*tokP;
+      break;
+    }
+    case 4: {
+      professor[nr_professor].nascimento.dia = atoi(tokP);
+      break;
+    }
+    case 5: {
+      professor[nr_professor].nascimento.mes = atoi(tokP);
+      break;
+    }
+    case 6: {
+      professor[nr_professor].nascimento.ano = atoi(tokP);
+      break;
+    }
+    case 7: {
+      strcpy(professor[nr_professor].cpf, tokP);
+      break;
+    }
+    case 8: {
+      professor[nr_professor].ativo = atoi(tokP);
+      break;
+    }
+    }
+    printf(" %s\n", tokP);
+    tokP = strtok(0, ";");
+    cont++;
+  }
+}

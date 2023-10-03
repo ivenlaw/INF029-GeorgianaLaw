@@ -57,14 +57,8 @@ int menuGeral();
 int menuCadastro();
 int menuRelatorios();
 int menuDisciplina();
-int aberturaArquivoAluno (Ficha aluno[]);
-void fechaAluno(Ficha aluno[], int nr_aluno);
-void carregarAluno(char linhaAluno[], Ficha aluno[], int nr_aluno);
-int aberturaArquivoProfessor (Ficha professor[]);
-void fechaProfessor(Ficha professor[], int nr_professor);
-void carregarProfessor(char linhaProfessor[], Ficha professor[], int nr_professor);
-int aberturaArquivoDisciplina (Materia disciplina[], int nr_professor, Ficha professor[]);
-void fechaDisciplina(Materia disciplina[], int nr_disciplina, int nr_professor, Ficha professor[], Ficha aluno[], int aluno_disciplina, int nr_aluno);
-void carregarDisciplina(char linhaDisciplina[], Materia disciplina[], int nr_disciplina, int nr_professor, Ficha professor[]);
+
+
+
 
 #endif
