@@ -319,9 +319,58 @@ int q3(char *texto, char c, int isCaseSensitive)
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
-    int qtdOcorrencias = -1;
-
+  int qtdOcorrencias = -1;
+  int sizeBusca=0;
+  int x=0, y=0, z=0, p=0, i, j;
   
+// tamanho string de busca
+  for(i=0; strBusca[i]!='\0'; i++) {
+    if(strBusca[i]!='\0') {
+      sizeBusca+=1;
+    }
+	}
+
+// busca
+  for(i=0; strTexto[i]!='\0'; i++) {
+//    printf("i=%d, j=%d\n", i, j);
+  //  printf("y=%d, z=%d\n", y, x);
+//    printf("qtdOcorrencias=%d, p=%d\n", qtdOcorrencias, p);
+    j=0;
+    while(strBusca[j]!='\0'){
+			if(strBusca[j]==strTexto[i]) {
+        if (x==0){
+          p=i+1;  
+        }
+        x+=1;
+        j++;
+        i++;
+				if (x==sizeBusca) {
+          z+=1;
+          posicoes[y]=p;
+          y++;
+          posicoes[y]=i;
+          y++;
+          if (z==1){
+            qtdOcorrencias=0;
+            qtdOcorrencias+=1;
+            j=0;
+          }
+          else if(z>1){
+            qtdOcorrencias+=1;
+            j=0;
+          }
+				}
+      }	
+      else {
+        if (qtdOcorrencias<0){
+          qtdOcorrencias=0;
+        }
+        x=0;
+        j=0;
+        break;
+      }
+		}
+	}
 
     return qtdOcorrencias;
 }
@@ -404,8 +453,8 @@ int q6(int numerobase, int numerobusca)
     i++;
   }
 
-  for (i=0; i<tamBase;i++){
-    printf("vetor base %d é %d tamBase %d \n", i, vetBase[i], tamBase);}
+//  for (i=0; i<tamBase;i++){
+//    printf("vetor base %d é %d tamBase %d \n", i, vetBase[i], tamBase);}
 
   if (nBusca>=0 && nBusca<=99){
     while (nBusca!=0){
@@ -448,9 +497,9 @@ int q6(int numerobase, int numerobusca)
     }
   }
 
-  for (i=0; i<tamBusca;i++){
-    printf("vetor busca %d é %d tamBusca %d \n", i, vetBusca[i], tamBusca);
-}
+//  for (i=0; i<tamBusca;i++){
+ //   printf("vetor busca %d é %d tamBusca %d \n", i, vetBusca[i], tamBusca);
+//}
   if (tamBusca==1) {
     for(i=0; i<tamBase; i++){
         if (vetBusca[0]==vetBase[i]){
