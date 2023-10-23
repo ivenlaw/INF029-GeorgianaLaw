@@ -275,7 +275,8 @@ int getDadosDeTodasEstruturasAuxiliares(int vetorAux[]) {
   int k=0;
 
   for (int i = 0; i < TAM; i++){
-    tamTotal=tamTotal+vetorPrincipal[i].qtd;
+    tamTotal = tamTotal + (vetorPrincipal[i].qtd);
+//    printf(">> vetorPrincipal[%d].qtd = %d\n", i, vetorPrincipal[i].qtd);
   }
 
   if (tamTotal == 0){
@@ -307,6 +308,38 @@ estão vazias
 int getDadosOrdenadosDeTodasEstruturasAuxiliares(int vetorAux[]) {
   printf("\n funcao getDadosOrdenadosDeTodasEstruturasAuxiliares \n");
   int retorno = 0;
+
+    int tamTotal = 0;
+    int k=0;
+
+    for (int i = 0; i < TAM; i++){
+      tamTotal = tamTotal + (vetorPrincipal[i].qtd);
+  //    printf(">> vetorPrincipal[%d].qtd = %d\n", i, vetorPrincipal[i].qtd);
+    }
+
+    if (tamTotal == 0){
+      retorno = TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
+    }
+    else {
+      for(int i=0; i<tamTotal; i++){
+        if (vetorPrincipal[i].aux != NULL){
+          for(int j=0; j<vetorPrincipal[i].qtd; j++){
+            vetorAux[k] = vetorPrincipal[i].aux[j];
+            k++;
+          }
+        }
+      }
+      for(int i=0; i<tamTotal; i++){  
+        for(int j=1; j<tamTotal; j++){
+          if (vetorAux[i] > vetorAux[j]){
+            int z=vetorAux[i];
+            vetorAux[i] = vetorAux[j];
+            vetorAux[j] = z;
+          }
+        }
+      }
+      retorno = SUCESSO;
+    }
   return retorno;
 }
 
@@ -392,7 +425,7 @@ void inicializar() {
     vetorPrincipal[i].tam = 0;
     vetorPrincipal[i].aux = NULL;
     vetorPrincipal[i].qtd = 0;
-//    printf(">> vetorPrincipal[%d] = %d\n", i, (&vetorPrincipal[i].aux)); // TIRAR
+ //   printf(">> vetorPrincipal[%d] = %d\n", i, vetorPrincipal[i].qtd); // TIRAR
   }
 }
 
@@ -403,5 +436,12 @@ para poder liberar todos os espaços de memória das estruturas auxiliares.
 */
 
 void finalizar() {
-//  free(vetorPrincipal);
+//  printf("\n funcao finalizar \n");
+  for (int i = 0; i < TAM; i++) {
+    free(vetorPrincipal[i].aux);    
+    vetorPrincipal[i].aux = NULL;
+    vetorPrincipal[i].tam = 0;
+    vetorPrincipal[i].qtd = 0;  
+//    printf("vetorPrincipal[%d].qtd = %d\n", i, vetorPrincipal[i].qtd);
+  } 
 }
